@@ -1,5 +1,5 @@
 import React from "react"
-import { Navbar } from "./components"
+import { ChartsContainer, Navbar } from "./components"
 
 const App = () => {
     return (
@@ -19,15 +19,7 @@ const App = () => {
                     </form>
                 </div>
 
-                <div className="homepage__container__content">
-                    <div className="homepage__container__content__cards">
-                        <div className="homepage__container__content__cards__item">
-                            <img className="homepage__container__content__cards__item__image" />
-                            <h3>Title</h3>
-                            
-                        </div>
-                    </div>
-                </div>
+                <ChartsContainer />
             </div>
         </section>
     )
