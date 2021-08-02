@@ -1,5 +1,5 @@
 import Navbar from "./layouts/Navbar"
 import { SongCard } from "./Cards"
-import { ChartsContainer } from "./Containers"
+import { ChartsContainer, SearchContainer } from "./Containers"
 
-export { Navbar, SongCard, ChartsContainer }
+export { Navbar, SongCard, ChartsContainer, SearchContainer }
