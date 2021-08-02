@@ -1,5 +1,5 @@
 {
-    "name": "create-react-app-with-eslint-husky-prettier",
+    "name": "js-mastery-assignment",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -10,7 +10,8 @@
         "@types/node": "^12.0.0",
         "@types/react": "^17.0.0",
         "@types/react-dom": "^17.0.0",
-        "node-sass": "^6.0.1",
+        "env-cmd": "^10.1.0",
+        "node-sass": "^5.0.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-scripts": "4.0.3",
@@ -18,8 +19,10 @@
         "web-vitals": "^1.0.1"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "env-cmd -f .env.development react-scripts start",
         "build": "react-scripts build",
+        "start:prod": "env-cmd -f .env.production react-scripts start",
+        "build:prod": "env-cmd -f .env.production react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "lint": "eslint .",
@@ -51,6 +54,8 @@
     },
     "devDependencies": {
         "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
         "husky": "^7.0.1",
         "lint-staged": "^11.1.1",
         "prettier": "^2.3.2"

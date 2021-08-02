@@ -1,0 +1,15 @@
+.navbar {
+    &__container {
+        height: 7rem;
+        background-color: $color-black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__brand {
+            &__name {
+                font-size: 1.5rem;
+            }
+        }
+    }
+}

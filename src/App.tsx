@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import { Navbar } from "./components"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    return (
+        <section className="homepage">
+            <Navbar />
+            <div className="homepage__container">
+                <div className="homepage__container__search">
+                    <form className="homepage__container__search__form">
+                        <input
+                            type="text"
+                            className="homepage__container__search__form__input"
+                            placeholder="Type a song.."
+                        />
+                        <button className="homepage__container__search__form__submit">
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    )
 }
 
-export default App;
+export default App
