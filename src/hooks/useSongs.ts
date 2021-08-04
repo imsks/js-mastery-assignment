@@ -1,7 +1,8 @@
 import { Method } from "axios"
 import { useEffect, useState } from "react"
-import { ChartSong, ChartSongsResponse } from "../interfaces"
+import { ChartSong, ChartSongFromAPIs, ChartSongsResponse } from "../interfaces"
 import { fetchSongsData } from "../utils"
+import ChartsData from "../data/Charts.json"
 
 export const useSongs = () => {
     const [songs, setSongs] = useState([] as Array<ChartSong>)
@@ -21,14 +22,17 @@ export const useSongs = () => {
 
         const response = (await fetchSongsData(options)) as ChartSongsResponse
 
-        const songsList = response.tracks.map((song) => {
-            const { title, images, subtitle, url } = song
+        const songsList = response.tracks.map((song: ChartSongFromAPIs) => {
+            const { title, images, subtitle, url, hub } = song
+
+            const hubAction = hub.actions.find((action) => action.uri)?.uri
 
             return {
                 name: title,
                 imageUrl: images.coverart,
                 artist: subtitle,
                 url,
+                hubAction,
             } as ChartSong
         })
 
@@ -37,7 +41,7 @@ export const useSongs = () => {
 
     useEffect(() => {
         fetchData()
-    }, [songs])
+    }, [])
 
     return songs
 }

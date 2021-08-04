@@ -8,22 +8,33 @@ export interface ChartSongFromAPIs {
         coverart: string
     }
     subtitle: string
+    hub: {
+        actions: Array<ChartSongFromAPIsAction>
+    }
     url: string
 }
 
+interface ChartSongFromAPIsAction {
+    name: string
+    uri?: string
+}
+
 export interface SearchResponse {
-    response: {
+    tracks: {
         hits: Array<SearchedSong>
     }
 }
 
 export interface SearchedSong {
-    result: {
+    track: {
         title: string
-        primary_artist: {
-            name: string
+        images: {
+            coverart: string
         }
-        header_image_url: string
+        subtitle: string
+        hub: {
+            actions: Array<ChartSongFromAPIsAction>
+        }
         url: string
     }
 }

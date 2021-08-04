@@ -3,4 +3,5 @@ export interface ChartSong {
     imageUrl: string
     artist: string
     url: string
+    hubAction: string
 }

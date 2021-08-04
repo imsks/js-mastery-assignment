@@ -39,11 +39,18 @@
         }
 
         &__content {
+            &__heading {
+                font-size: 2rem;
+                color: $color-black;
+                text-align: center;
+                margin: 3rem 0 1rem 0;
+            }
+
             &__cards {
                 display: grid;
                 gap: 4rem;
                 grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-                margin: 4rem;
+                margin: 2rem 4rem;
 
                 &__item {
                     &__image {
@@ -55,7 +62,6 @@
                         padding: 2rem 0;
                         display: flex;
                         justify-content: space-between;
-                        align-items: baseline;
 
                         &__container {
                             &__name {
@@ -72,18 +78,49 @@
                             }
                         }
 
+                        &__play {
+                            background: $color-black;
+                            padding: 1rem 2rem;
+                            border-radius: 10px;
+                            cursor: pointer;
+                            transition: 0.2s all;
+
+                            &:hover {
+                                transform: scale(0.95);
+                            }
+
+                            &__image {
+                                width: 7rem;
+                            }
+
+                            &__link {
+                                height: 100%;
+                                display: flex;
+                                align-items: center;
+
+                                &__text {
+                                    font-size: 1.5rem;
+                                }
+                            }
+                        }
+
                         &__link {
                             &__button {
                                 outline: none;
-                                border: none;
-                                background: $color-black;
-                                padding: 1rem 3rem;
+                                border: 2px solid $color-black;
+                                background: $color-white;
+                                padding: 1.5rem 3rem;
                                 border-radius: 30px;
-                                color: $color-white;
+                                color: $color-black;
                                 cursor: pointer;
-                                margin: 1.5rem 0 0 0;
+                                width: 100%;
                                 font-size: 1.4rem;
                                 font-weight: 600;
+                                transition: 0.2s all;
+
+                                &:hover {
+                                    transform: scale(0.95);
+                                }
                             }
                         }
                     }

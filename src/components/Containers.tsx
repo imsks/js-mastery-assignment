@@ -2,14 +2,16 @@ import { Method } from "axios"
 import { useState } from "react"
 import { SongCard } from "."
 import { useSongs } from "../hooks"
-import { ChartSong, SearchResponse } from "../interfaces"
+import { ChartSong, SearchedSong, SearchResponse } from "../interfaces"
 import { fetchSongsData } from "../utils"
+import SearchData from "../data/Search.json"
 
 export const ChartsContainer = () => {
     const songs = useSongs() as Array<ChartSong>
 
     return (
         <div className="homepage__container__content">
+            <h1 className="homepage__container__content__heading">Daily Charts</h1>
             <div className="homepage__container__content__cards">
                 {songs.length > 0
                     ? songs.map((song, index) => {
@@ -20,6 +22,7 @@ export const ChartsContainer = () => {
                                   artist={song.artist}
                                   imageUrl={song.imageUrl}
                                   url={song.url}
+                                  hubAction={song.hubAction}
                               />
                           )
                       })
@@ -42,24 +45,34 @@ export const SearchContainer = () => {
 
         const options = {
             method: method,
-            url: `${process.env.REACT_APP_RAPID_API_GENIUS_BASE_ENDPOINT}/search`,
-            params: { q: query },
+            url: `${process.env.REACT_APP_RAPID_API_SHAZAM_BASE_ENDPOINT}/search`,
+            params: {
+                term: query,
+                locale: "en-US",
+                offset: "0",
+                limit: "0",
+            },
             headers: {
                 "x-rapidapi-key": process.env.REACT_APP_RAPID_API_KEY,
-                "x-rapidapi-host": process.env.REACT_APP_RAPID_API_GENIUS_HOST,
+                "x-rapidapi-host": process.env.REACT_APP_RAPID_API_SHAZAM_HOST,
             },
         }
 
-        const response = (await fetchSongsData(options)) as SearchResponse
+        // const response = (await fetchSongsData(options)) as SearchResponse
 
-        const searchedSongs = response.response.hits.map((song) => {
-            const { title, primary_artist, header_image_url, url } = song.result
+        const response = SearchData as SearchResponse
+
+        const searchedSongs = response.tracks.hits.map((song: SearchedSong) => {
+            const { title, images, subtitle, hub, url } = song.track
+
+            const hubAction = hub.actions.find((action) => action.uri)?.uri
 
             return {
                 name: title,
-                artist: primary_artist.name,
-                imageUrl: header_image_url,
+                imageUrl: images.coverart,
+                artist: subtitle,
                 url,
+                hubAction,
             } as ChartSong
         })
 
@@ -82,21 +95,28 @@ export const SearchContainer = () => {
                     Search
                 </button>
             </form>
-            <div className="homepage__container__content__cards">
-                {searchedSongs.length > 0
-                    ? searchedSongs.map((song, index) => {
-                          return (
-                              <SongCard
-                                  key={index}
-                                  name={song.name}
-                                  artist={song.artist}
-                                  imageUrl={song.imageUrl}
-                                  url={song.url}
-                              />
-                          )
-                      })
-                    : null}
-            </div>
+
+            {searchedSongs && searchedSongs.length > 0 && (
+                <>
+                    <h1 className="homepage__container__content__heading">
+                        Search Results
+                    </h1>
+                    <div className="homepage__container__content__cards">
+                        {searchedSongs.map((song, index) => {
+                            return (
+                                <SongCard
+                                    key={index}
+                                    name={song.name}
+                                    artist={song.artist}
+                                    imageUrl={song.imageUrl}
+                                    url={song.url}
+                                    hubAction={song.hubAction}
+                                />
+                            )
+                        })}
+                    </div>
+                </>
+            )}
         </div>
     )
 }
